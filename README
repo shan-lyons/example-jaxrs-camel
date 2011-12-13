@@ -1,0 +1,4 @@
+mvn package
+deploy on Tomcat
+http://localhost:9000/example
+should show "SUCCESS"
