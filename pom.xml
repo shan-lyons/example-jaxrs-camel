@@ -9,6 +9,12 @@
 	<description>
 		1.0 - Initial project.
 	</description>
+	
+	<parent>
+		<groupId>com.akqa.audi</groupId>
+		<artifactId>audi-common-camel-pom</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
 
 	<dependencies>
 		<dependency>
@@ -103,6 +109,43 @@
 				<artifactId>camel-maven-plugin</artifactId>
 				<version>${version.camel}</version>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<server>myTomcat</server>
+					<url>${tomcat.url}</url>
+					<path>/${project.build.finalName}</path>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<mainClass>org.apache.camel.example.cxf.CamelRouteClient</mainClass>
+					<includePluginDependencies>false</includePluginDependencies>
+					<systemProperties>
+						<property>
+							<key>java.util.logging.config.file</key>
+							<value>logging.properties</value>
+						</property>
+					</systemProperties>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<!--groupId>org.apache.maven.plugins</groupId -->
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<!--version>2.8</version -->
+				<configuration>
+					<!--useProjectReferences>false</useProjectReferences -->
+					<wtpversion>${wtpVersion}</wtpversion>
+					<wtpContextName>/${contextName}</wtpContextName>
+					<projectNameTemplate>${contextName}</projectNameTemplate>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -113,5 +156,6 @@
 		<version.mockito>1.8.5</version.mockito>
 		<version.camel>2.8.2</version.camel>
 		<version.cxf>2.4.3</version.cxf>
+		<wtpVersion>2.0</wtpVersion>
 	</properties>
 </project>

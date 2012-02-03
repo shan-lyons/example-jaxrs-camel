@@ -17,8 +17,6 @@
 
 	<import resource="classpath:META-INF/cxf/cxf.xml"/>
 
-	<bean id="configuratorDataProcessor" class="com.example.ConfiguratorDataProcessor"/>
-
 	<bean id="configuratorResource" class="com.example.ConfiguratorResource"/>
 
 	<jaxrs:server id="configuratorService" address="http://localhost:9000/">
