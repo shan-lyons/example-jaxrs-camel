@@ -8,7 +8,7 @@ public class ConfiguratorRouter extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		from("cxfrs://http://localhost:9000?resourceClasses=" + ConfiguratorResource.class.getName())
+		from("cxfrs:bean:rsServer")
 			.process(new Processor() {
 			    @Override
                 public void process(Exchange exchange) {
