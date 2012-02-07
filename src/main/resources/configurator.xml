@@ -25,20 +25,14 @@
     http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
     http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
   
-  <cxf:rsServer id="rsServer" address="http://localhost:9090/batch"
-serviceClass="net.nanthrax.examples.camel.batch.impl.ControllerService"/>
-
-  <camelContext xmlns="http://camel.apache.org/schema/spring">
-    <route id="control">
-      <from uri="cxfrs:bean:rsServer"/>
-      <to uri="log:net.nanthrax.examples.camel.batch"/>
-      <to uri="controllerBean"/>
-    </route>
+  <cxf:rsServer id="rsServer" address="http://localhost:9000/"
+	serviceClass="com.example.ConfiguratorResource"/>
+	
+	<bean id="myRoutes" class="com.example.ConfiguratorRouter" />
+	
+  <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+    <routeBuilder ref="myRoutes"/>
   </camelContext>
-
-  <bean id="controllerBean" class="net.nanthrax.examples.camel.batch.impl.ControllerBean">
-    <property name="routeId" value="batch"/>
-  </bean>
 
 </beans>
 <!-- END SNIPPET: e1 -->
